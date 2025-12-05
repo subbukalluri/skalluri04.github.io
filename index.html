@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Subramanya Chowdary Kalluri - GenAI DevOps & Platform Engineer specializing in AI agents, Kubernetes, and cloud automation">
+    <meta name="keywords" content="DevOps, GenAI, Platform Engineer, Kubernetes, AWS, Claude, AI Agents, MLOps">
+    <meta name="author" content="Subramanya Chowdary Kalluri">
+    <title>Subramanya Kalluri | GenAI DevOps Engineer</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #06b6d4;
+            --text: #334155;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--secondary);
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f0fdfa 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 80%;
+            height: 150%;
+            background: var(--gradient);
+            opacity: 0.05;
+            border-radius: 50%;
+            transform: rotate(-15deg);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .code-card {
+            background: var(--secondary);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .code-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ef4444; }
+        .code-dot.yellow { background: #eab308; }
+        .code-dot.green { background: #22c55e; }
+
+        .code-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            color: #e2e8f0;
+        }
+
+        .code-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #c084fc; }
+        .code-string { color: #4ade80; }
+        .code-function { color: #60a5fa; }
+        .code-variable { color: #f472b6; }
+
+        /* Skills Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.125rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon i {
+            font-size: 1.75rem;
+            color: white;
+        }
+
+        .skill-card h3 {
+            font-size: 1.25rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: #f1f5f9;
+            color: var(--text);
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Experience Section */
+        .experience-bg {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient);
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -6px;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .timeline-content {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        .timeline-company {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .timeline-date {
+            background: #f1f5f9;
+            padding: 0.375rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .timeline-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--text);
+        }
+
+        .timeline-content li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-header {
+            background: var(--gradient);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .project-header i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .project-body {
+            padding: 1.5rem;
+        }
+
+        .project-body p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .project-tech span {
+            background: linear-gradient(135deg, #eff6ff 0%, #ecfeff 100%);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-bg {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .contact-bg .section-title {
+            color: white;
+        }
+
+        .contact-bg .section-subtitle {
+            color: #94a3b8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h4 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            background: #020617;
+            color: #64748b;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-content p {
+                max-width: none;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .code-card {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 0;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Subbu<span>.dev</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Subramanya Chowdary Kalluri</h1>
+                <p class="subtitle">GenAI DevOps & Platform Engineer</p>
+                <p>Building intelligent infrastructure with AI-driven automation, LLM-powered agents, and cloud-native solutions. Passionate about transforming traditional DevOps into self-healing, intelligent systems.</p>
+                <div class="hero-buttons">
+                    <a href="Subbu_GenAI_DevOps_Resume.pdf" class="btn btn-primary" download>
+                        <i class="fas fa-download"></i> Download Resume
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Get in Touch
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-card">
+                    <div class="code-header">
+                        <div class="code-dot red"></div>
+                        <div class="code-dot yellow"></div>
+                        <div class="code-dot green"></div>
+                    </div>
+                    <div class="code-content">
+                        <div class="code-line"><span class="code-comment">// AI-Powered DevOps Agent</span></div>
+                        <div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">agent</span> = <span class="code-keyword">new</span> <span class="code-function">ClaudeAgent</span>({</div>
+                        <div class="code-line">  <span class="code-string">skills</span>: [<span class="code-string">'code-review'</span>,</div>
+                        <div class="code-line">           <span class="code-string">'infrastructure'</span>,</div>
+                        <div class="code-line">           <span class="code-string">'legal-analysis'</span>],</div>
+                        <div class="code-line">  <span class="code-string">orchestration</span>: <span class="code-string">'Temporal'</span>,</div>
+                        <div class="code-line">  <span class="code-string">platform</span>: <span class="code-string">'Kubernetes'</span></div>
+                        <div class="code-line">});</div>
+                        <div class="code-line"></div>
+                        <div class="code-line"><span class="code-keyword">await</span> <span class="code-variable">agent</span>.<span class="code-function">deploy</span>();</div>
+                        <div class="code-line"><span class="code-comment">// ✓ Infrastructure optimized</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title">Core Competencies</h2>
+        <p class="section-subtitle">Bridging AI innovation with enterprise-grade infrastructure</p>
+        
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>GenAI & AI Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Claude API</span>
+                    <span class="skill-tag">GPT-4</span>
+                    <span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">RAG</span>
+                    <span class="skill-tag">Claude Code</span>
+                    <span class="skill-tag">AI Agents</span>
+                    <span class="skill-tag">MLOps</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-dharmachakra"></i>
+                </div>
+                <h3>Container Orchestration</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Kubernetes</span>
+                    <span class="skill-tag">Helm</span>
+                    <span class="skill-tag">Istio</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">EKS</span>
+                    <span class="skill-tag">Kubeflow</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>Cloud & Infrastructure</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">Terraform</span>
+                    <span class="skill-tag">Ansible</span>
+                    <span class="skill-tag">Temporal.io</span>
+                    <span class="skill-tag">Lambda</span>
+                    <span class="skill-tag">SageMaker</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-code-branch"></i>
+                </div>
+                <h3>CI/CD & GitOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">GitHub Actions</span>
+                    <span class="skill-tag">Jenkins</span>
+                    <span class="skill-tag">ArgoCD</span>
+                    <span class="skill-tag">GitLab CI</span>
+                    <span class="skill-tag">Tekton</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Observability</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Prometheus</span>
+                    <span class="skill-tag">Grafana</span>
+                    <span class="skill-tag">ELK Stack</span>
+                    <span class="skill-tag">Datadog</span>
+                    <span class="skill-tag">OpenTelemetry</span>
+                </div>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Programming</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Go</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Bash</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="experience-bg" id="experience">
+        <div class="section">
+            <h2 class="section-title">Professional Experience</h2>
+            <p class="section-subtitle">Building the future of intelligent infrastructure</p>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">Senior DevOps & GenAI Platform Engineer</h3>
+                                <p class="timeline-company">Wells Fargo, Fremont, CA</p>
+                            </div>
+                            <span class="timeline-date">Oct 2022 - Present</span>
+                        </div>
+                        <ul>
+                            <li>Architected <strong>LLM-powered Code Review Agent</strong> using Claude API, reducing manual review time by 60%</li>
+                            <li>Built <strong>Legal AI Assistant</strong> with RAG architecture for contract analysis, achieving 95% accuracy</li>
+                            <li>Implemented <strong>Temporal.io workflows</strong> for durable DevOps automation across 96 VMs</li>
+                            <li>Pioneered <strong>Claude Code adoption</strong> for IaC development, accelerating development by 40%</li>
+                            <li>Designed <strong>Kubernetes-native MLOps pipeline</strong> achieving 99.9% uptime for AI inference</li>
+                            <li>Developed AI-powered monitoring with LLM-based anomaly detection, reducing incident response by 45%</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <div>
+                                <h3 class="timeline-title">DevOps Engineer / Java Developer</h3>
+                                <p class="timeline-company">Teki Smarg, Hyderabad, India</p>
+                            </div>
+                            <span class="timeline-date">May 2020 - Jul 2021</span>
+                        </div>
+                        <ul>
+                            <li>Led CI/CD pipeline design for Java/J2EE applications, reducing deployment time from hours to minutes</li>
+                            <li>Architected containerization strategy migrating monolithic apps to microservices</li>
+                            <li>Implemented infrastructure automation using Ansible and Chef across 96+ VMs</li>
+                            <li>Achieved 99.5% uptime through SLA-driven support processes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title">Featured GenAI Projects</h2>
+        <p class="section-subtitle">Transforming operations with intelligent automation</p>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-code"></i>
+                    <h3>Autonomous Code Review Agent</h3>
+                </div>
+                <div class="project-body">
+                    <p>Multi-model code review system using Claude Sonnet and GPT-4 with automatic PR summarization, security vulnerability detection, and RAG-based context retrieval from codebase documentation.</p>
+                    <div class="project-tech">
+                        <span>Claude API</span>
+                        <span>GitHub Actions</span>
+                        <span>RAG</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-scale-balanced"></i>
+                    <h3>Legal Document AI Assistant</h3>
+                </div>
+                <div class="project-body">
+                    <p>Enterprise legal AI platform using Claude for contract analysis, risk assessment, and compliance verification. Semantic search pipeline with vector embeddings for cross-referencing legal clauses.</p>
+                    <div class="project-tech">
+                        <span>Claude</span>
+                        <span>Vector DB</span>
+                        <span>FastAPI</span>
+                        <span>LangChain</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-card">
+                <div class="project-header">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Temporal DevOps Orchestration</h3>
+                </div>
+                <div class="project-body">
+                    <p>Durable execution framework using Temporal.io for complex infrastructure provisioning. Parent-child workflow patterns for EKS cluster deployment with automatic rollback and human-in-the-loop approvals.</p>
+                    <div class="project-tech">
+                        <span>Temporal.io</span>
+                        <span>Go</span>
+                        <span>EKS</span>
+                        <span>Terraform</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-bg" id="contact">
+        <div class="section">
+            <h2 class="section-title">Let's Connect</h2>
+            <p class="section-subtitle">Open to opportunities in GenAI, Platform Engineering, and DevOps Leadership</p>
+            
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-envelope"></i>
+                    <h4>Email</h4>
+                    <a href="mailto:Skalluri04@gmail.com">Skalluri04@gmail.com</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h4>Phone</h4>
+                    <a href="tel:+19379564105">+1 (937) 956-4105</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fab fa-linkedin"></i>
+                    <h4>LinkedIn</h4>
+                    <a href="https://linkedin.com/in/subbu-kalluri" target="_blank">linkedin.com/in/subbu-kalluri</a>
+                </div>
+                
+                <div class="contact-card">
+                    <i class="fab fa-github"></i>
+                    <h4>GitHub</h4>
+                    <a href="https://github.com/skalluri04" target="_blank">github.com/skalluri04</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Subramanya Chowdary Kalluri. Built with passion for GenAI & DevOps.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.skill-card, .timeline-item, .project-card, .contact-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
