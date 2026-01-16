@@ -1,0 +1,27 @@
+# Prometheus Configuration
+# 
+# Prometheus scrapes metrics from our Spring Boot application
+# These metrics include:
+# - HTTP request rates and latencies
+# - JVM metrics (memory, threads, GC)
+# - Custom business metrics (AI request counts, etc.)
+
+global:
+  scrape_interval: 15s # Scrape targets every 15 seconds
+  evaluation_interval: 15s # Evaluate rules every 15 seconds
+
+# Scrape configurations
+scrape_configs:
+  # Spring Boot Application
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['backend:8080']
+        labels:
+          application: 'ai-sentiment-analyzer'
+          environment: 'development'
+
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
