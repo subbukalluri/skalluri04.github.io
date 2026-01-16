@@ -1,0 +1,101 @@
+# Docker Compose for AI Observability Stack
+#
+# This file orchestrates the entire observability stack:
+# 1. Backend (Spring Boot) - Our AI application
+# 2. Prometheus - Metrics collection and storage
+# 3. Jaeger - Distributed tracing backend
+# 4. Grafana - Visualization and dashboards
+#
+# All components are networked together and configured for seamless integration
+
+version: '3.8'
+
+services:
+  # Jaeger - Distributed Tracing System
+  # Collects, stores, and visualizes traces from frontend and backend
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    container_name: jaeger
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "4317:4317"    # OTLP gRPC receiver (backend traces)
+      - "4318:4318"    # OTLP HTTP receiver (frontend traces)
+      - "14268:14268"  # Jaeger collector HTTP
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+      - LOG_LEVEL=info
+    networks:
+      - observability
+
+  # Prometheus - Metrics Collection and Storage
+  # Scrapes metrics from Spring Boot Actuator endpoint
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    networks:
+      - observability
+
+  # Grafana - Visualization Platform
+  # Creates beautiful dashboards from Prometheus metrics and Jaeger traces
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"  # Using 3001 to avoid conflict with React
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ../grafana/datasources:/etc/grafana/provisioning/datasources
+      - ../grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ../grafana/dashboard-config.yml:/etc/grafana/provisioning/dashboards/dashboard-config.yml
+    depends_on:
+      - prometheus
+    networks:
+      - observability
+
+  # Spring Boot Backend
+  # Our AI sentiment analysis application with full instrumentation
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    container_name: ai-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - OTEL_SERVICE_NAME=ai-sentiment-analyzer
+      - OTEL_TRACES_EXPORTER=otlp
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://jaeger:4317
+      - OTEL_METRICS_EXPORTER=none
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - jaeger
+      - prometheus
+    networks:
+      - observability
+
+networks:
+  observability:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
+

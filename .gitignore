@@ -1,0 +1,32 @@
+# API Keys and Secrets
+Anthropic_API_Key.txt
+*.env
+.env.local
+.env*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+
+# Build outputs
+build/
+dist/
+out/
+
+# Cache
+.cache/
+*.log
